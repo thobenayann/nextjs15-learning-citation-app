@@ -1,3 +1,4 @@
+import { Header } from '@/src/components/header';
 import type { Metadata } from 'next';
 import localFont from 'next/font/local';
 import './globals.css';
@@ -26,9 +27,12 @@ export default function RootLayout({
     return (
         <html lang='en' className='h-full'>
             <body
-                className={`${geistSans.variable} font-sans ${geistMono.variable} font-mono antialiased h-full`}
+                className={`${geistSans.variable} font-sans ${geistMono.variable} font-mono antialiased h-full max-w-lg p-4`}
             >
-                {children}
+                <div className='flex flex-col gap-4'>
+                    <Header />
+                    {children}
+                </div>
             </body>
         </html>
     );
