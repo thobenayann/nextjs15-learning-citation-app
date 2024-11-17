@@ -6,6 +6,7 @@ export default async function Page(props: {
 }) {
     // Example of how to deal with params or searchParams
     const params = await props.params;
+    // test the pattern "?search=value"
     const searchParams = await props.searchParams;
 
     return (
