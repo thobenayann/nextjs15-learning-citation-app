@@ -10,21 +10,17 @@ import {
 import { Input } from '@/src/components/ui/input';
 import { Label } from '@/src/components/ui/label';
 import { useFormStatus } from 'react-dom';
+import { createCitationAction } from './citation.action';
 
 export default function Page() {
     // Example of how to deal with form and API route
     // Cf app/api/citations/route.ts
 
     const createCitation = async (formData: FormData) => {
-        const result = await fetch(`/api/citations`, {
-            body: JSON.stringify({
-                citation: formData.get('citation'),
-                author: formData.get('author'),
-            }),
-            method: 'POST',
+        const json = await createCitationAction({
+            author: String(formData.get('author')),
+            text: String(formData.get('citation')),
         });
-
-        const json = await result.json();
 
         console.log(json);
     };
