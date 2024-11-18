@@ -6,12 +6,15 @@ export async function GET() {
 }
 
 export async function POST(request: NextRequest) {
-    const formData = await request.formData();
+    const json = await request.json();
+
+    // simulate delay
+    await new Promise((resolve) => setTimeout(resolve, 1000));
 
     const newCitation = await prisma.citation.create({
         data: {
-            author: String(formData.get('author')),
-            text: String(formData.get('citation')),
+            author: json.author,
+            text: json.citation,
         },
     });
 

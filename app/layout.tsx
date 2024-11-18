@@ -24,10 +24,12 @@ export default function RootLayout({
 }: Readonly<{
     children: React.ReactNode;
 }>) {
+    const isProduction = process.env.NODE_ENV === 'production';
     return (
         <html lang='en' className='h-full'>
             <body
                 className={`${geistSans.variable} font-sans ${geistMono.variable} font-mono antialiased h-full max-w-lg p-4`}
+                suppressHydrationWarning={isProduction}
             >
                 <div className='flex flex-col gap-4'>
                     <Header />

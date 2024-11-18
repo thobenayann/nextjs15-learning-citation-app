@@ -1,3 +1,5 @@
+'use client';
+
 import { Button } from '@/src/components/ui/button';
 import {
     Card,
@@ -7,10 +9,25 @@ import {
 } from '@/src/components/ui/card';
 import { Input } from '@/src/components/ui/input';
 import { Label } from '@/src/components/ui/label';
+import { useFormStatus } from 'react-dom';
 
 export default function Page() {
     // Example of how to deal with form and API route
     // Cf app/api/citations/route.ts
+
+    const createCitation = async (formData: FormData) => {
+        const result = await fetch(`/api/citations`, {
+            body: JSON.stringify({
+                citation: formData.get('citation'),
+                author: formData.get('author'),
+            }),
+            method: 'POST',
+        });
+
+        const json = await result.json();
+
+        console.log(json);
+    };
     return (
         <Card>
             <CardHeader>
@@ -18,8 +35,7 @@ export default function Page() {
             </CardHeader>
             <CardContent>
                 <form
-                    action='/api/citations'
-                    method='POST'
+                    action={async (formData) => await createCitation(formData)}
                     className='flex flex-col gap-2'
                 >
                     <Label>
@@ -30,9 +46,19 @@ export default function Page() {
                         Author
                         <Input name='author' />
                     </Label>
-                    <Button type='submit'>Create</Button>
+                    <SubmitButton />
                 </form>
             </CardContent>
         </Card>
     );
 }
+
+const SubmitButton = () => {
+    const { pending } = useFormStatus();
+
+    return (
+        <Button disabled={pending} type='submit'>
+            {pending ? 'Loading ...' : 'Create'}
+        </Button>
+    );
+};
