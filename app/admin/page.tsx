@@ -6,6 +6,7 @@ import {
     CardTitle,
 } from '@/src/components/ui/card';
 import { prisma } from '@/src/lib/prisma';
+import { Pencil } from 'lucide-react';
 import Link from 'next/link';
 import { DeleteCitationButton } from './citations/delete-citation-button';
 
@@ -38,7 +39,18 @@ export default async function Page() {
                                 -- {citation.author}
                             </p>
                         </div>
-                        <DeleteCitationButton id={citation.id} />
+                        <div className='flex flex-col gap-2'>
+                            <DeleteCitationButton id={citation.id} />
+                            <Link
+                                href={`/admin/citations/${citation.id}`}
+                                className={buttonVariants({
+                                    size: 'lg',
+                                    variant: 'outline',
+                                })}
+                            >
+                                <Pencil className='h-4 w-4' />
+                            </Link>
+                        </div>
                     </Card>
                 ))}
                 <Link

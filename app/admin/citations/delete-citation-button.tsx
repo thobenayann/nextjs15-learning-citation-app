@@ -3,10 +3,10 @@
 import { Button } from '@/src/components/ui/button';
 import { useToast } from '@/src/hooks/use-toast';
 import { ToastAction } from '@radix-ui/react-toast';
-import { Loader2 } from 'lucide-react';
+import { Loader2, Trash2 } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { useState, useTransition } from 'react';
-import { deleteCitationAction } from './new/citation.action';
+import { deleteCitationAction } from './citation.action';
 
 export function DeleteCitationButton(props: { id: number }) {
     const { toast } = useToast();
@@ -41,6 +41,7 @@ export function DeleteCitationButton(props: { id: number }) {
 
     return (
         <Button
+            size='sm'
             onClick={onDelete}
             variant='outline'
             disabled={isLoading || isPending}
@@ -51,7 +52,7 @@ export function DeleteCitationButton(props: { id: number }) {
                     Suppression...
                 </>
             ) : (
-                'Supprimer'
+                <Trash2 className='h-4 w-4' />
             )}
         </Button>
     );

@@ -30,3 +30,22 @@ export async function deleteCitationAction(id: number) {
 
     return { message: 'Citation deleted' };
 }
+
+export async function updateCitationAction(
+    id: number,
+    citation: { text: string; author: string }
+) {
+    try {
+        await prisma.citation.update({
+            where: { id },
+            data: {
+                author: citation.author,
+                text: citation.text,
+            },
+        });
+    } catch {
+        return { error: 'Failed to update citation' };
+    }
+
+    redirect('/admin');
+}
