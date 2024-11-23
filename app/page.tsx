@@ -7,7 +7,7 @@ import {
 } from '@/src/components/ui/card';
 import Link from 'next/link';
 
-export default function Home() {
+export default async function Home() {
     return (
         <Card>
             <CardHeader>

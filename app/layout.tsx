@@ -1,4 +1,5 @@
 import { Header } from '@/src/components/header';
+import { Toaster } from '@/src/components/ui/toaster';
 import type { Metadata } from 'next';
 import localFont from 'next/font/local';
 import './globals.css';
@@ -34,6 +35,7 @@ export default function RootLayout({
                 <div className='flex flex-col gap-4'>
                     <Header />
                     {children}
+                    <Toaster />
                 </div>
             </body>
         </html>
